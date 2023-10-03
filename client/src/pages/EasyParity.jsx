@@ -9,6 +9,7 @@ import useLimitedCapacityArray from "../custom-hooks/useLimitedCapacityArray";
 import generateRandomUserDataArray from "../modules/generateRandomDataArray";
 import { replaceDigitsWithY } from "../modules/replaceDigitsWithY";
 import RulePage from "../components/RulePage";
+import baseURL from "../baseURL";
 
 const SERVER_URL =
   "http://localhost:8000" ||
@@ -260,7 +261,7 @@ export default function EasyParity() {
   async function fetchUserBalance() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/user/balance",
+        `${baseURL}api/v1/user/balance`,
         {
           userId: userId,
         },
@@ -289,7 +290,7 @@ export default function EasyParity() {
   async function fetchUserOrders() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/user/toporders",
+        `${baseURL}api/v1/user/toporders`,
         {
           userId: userId,
         },

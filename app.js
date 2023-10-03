@@ -7,6 +7,7 @@ import { createServer } from "http";
 import cron from "node-cron";
 import { useAzureSocketIO } from "@azure/web-pubsub-socket.io";
 import process from "process";
+import path from "path";
 
 // Import middleware
 import jwtSocketMiddleware from "./middlewares/jwtSocketMiddleware.js";
@@ -129,6 +130,11 @@ cron.schedule("*/30 * * * * *", async () => {
     handleEventAfterInitialize("easyParity", gameResult, periodId);
     incrementCountById(periodId);
   } catch (error) {}
+});
+
+app.use(express.static("./client/dist"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
 });
 
 const start = async () => {

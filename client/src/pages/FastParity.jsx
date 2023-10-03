@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import useLimitedCapacityArray from "../custom-hooks/useLimitedCapacityArray";
 import generateRandomUserDataArray from "../modules/generateRandomDataArray";
 import RulePage from "../components/RulePage";
+import baseURL from "../baseURL";
 
 const SERVER_URL =
   "http://localhost:8000" ||
@@ -262,7 +263,7 @@ function FastParity() {
   async function fetchUserBalance() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/user/balance",
+        `${baseURL}api/v1/user/balance`,
         {
           userId: userId,
         },
@@ -290,7 +291,7 @@ function FastParity() {
   async function fetchUserOrders() {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/user/toporders",
+        `${baseURL}api/v1/user/toporders`,
         {
           userId: userId,
         },

@@ -1,8 +1,10 @@
 import axios from "axios";
 
+import baseURL from "../baseURL";
+
 // Create an Axios instance with a custom configuration
 const apiInstance = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL,
 });
 
 // Function to register a user

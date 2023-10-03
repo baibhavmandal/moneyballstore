@@ -1,9 +1,16 @@
 import axios from "axios";
 
+import baseURL from "../baseURL";
+
+// Create an Axios instance with a custom configuration
+const apiInstance = axios.create({
+  baseURL,
+});
+
 // Function to send OTP to the client
 async function sendOTPToClient(mobilenumber) {
   try {
-    const response = await axios.post("/api/send-otp", {
+    const response = await apiInstance.post("/api/v1/auth/send-otp", {
       mobilenumber,
     });
 

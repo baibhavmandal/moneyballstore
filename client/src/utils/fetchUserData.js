@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Define the base URL for your API
-const baseURL = "http://localhost:8000";
+import baseURL from "../baseURL";
 
 // Create an Axios instance with the base URL
 const apiInstance = axios.create({
