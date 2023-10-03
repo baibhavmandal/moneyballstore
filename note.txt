@@ -1,0 +1,111 @@
+https://cloud.mongodb.com/v2/603f742f64ab43299ed3f727#/clusters?fastPoll=true
+
+
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://baibhavmandal:<password>@demo.trhdpg4.mongodb.net/?retryWrites=true&w=majority";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
+
+Object in Game
+
+{
+  "userId": userId
+  "participatedInColorPrediction": true,
+  gameType: gameName,
+  "colorPredictionInfo": {
+    "colorsSelected": ["red", "green", "violet red"],
+    "numbersSelected": [1, 4, 7],
+    "colorBets": [
+      {
+        "color": "red",
+        "amountBetted": 50,
+        "totalBetsOnColor": 150
+      },
+      {
+        "color": "green",
+        "amountBetted": 30,
+        "totalBetsOnColor": 90
+      },
+      {
+        "color": "violet red",
+        "amountBetted": 20,
+        "totalBetsOnColor": 60
+      }
+    ],
+    "numberBets": [
+      {
+        "number": 1,
+        "amountBetted": 10,
+        "totalBetsOnNumber": 30
+      },
+      {
+        "number": 4,
+        "amountBetted": 15,
+        "totalBetsOnNumber": 45
+      },
+      {
+        "number": 7,
+        "amountBetted": 25,
+        "totalBetsOnNumber": 75
+      }
+    ]
+  }
+}
+
+{
+  "userId": "123456", // User ID
+  "participatedInQuizGame": true, // Status of participation in the quiz game
+  "actualAnswer": 42, // Actual answer of the quiz game
+  "answerChosenByUser": 42, // Answer chosen by the user
+  "amountBetted": 10 // Amount betted by the user
+}
+
+{
+  "userId": userId
+  "participatedInColorPrediction": true,
+  gameType: gameName,
+  expression: expression,
+  "colorPredictionInfo": {
+    "colorsSelected": ["red", "green", "violet red"],
+    "colorBets": [
+      {
+        "color": "red",
+        "amountBetted": 50,
+        "totalBetsOnColor": 150
+      },
+      {
+        "color": "green",
+        "amountBetted": 30,
+        "totalBetsOnColor": 90
+      },
+      {
+        "color": "violet red",
+        "amountBetted": 20,
+        "totalBetsOnColor": 60
+      }
+    ],
+  }
+}
