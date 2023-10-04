@@ -13,7 +13,8 @@ import RulePage from "../components/RulePage";
 import baseURL from "../baseURL";
 import useCounterWithReset from "../custom-hooks/useCounterWithReset";
 
-const SERVER_URL = process.argv[2] || "moneyballstore.webpubsub.azure.com";
+const SERVER_URL =
+  process.argv[2] || "https://moneyballstore.webpubsub.azure.com";
 const SOCKET_PATH = "/clients/socketio/hubs/easy_hub";
 const TIMER_INTERVAL = 1000;
 const INITIAL_COUNTDOWN = 30;

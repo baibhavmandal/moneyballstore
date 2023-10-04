@@ -11,7 +11,8 @@ import generateRandomUserDataArray from "../modules/generateRandomDataArray";
 import RulePage from "../components/RulePage";
 import baseURL from "../baseURL";
 
-const SERVER_URL = process.argv[2] || "moneyballstore.webpubsub.azure.com";
+const SERVER_URL =
+  process.argv[2] || "https://moneyballstore.webpubsub.azure.com";
 const SOCKET_PATH = "/clients/socketio/hubs/fast_hub";
 const TIMER_INTERVAL = 1000;
 const INITIAL_COUNTDOWN = 30;
