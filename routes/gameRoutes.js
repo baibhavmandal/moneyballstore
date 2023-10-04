@@ -4,11 +4,13 @@ let _ioSpareParty;
 let _ioFastParty;
 let _ioEasyParty;
 
+const origin = "moneyballstore.webpubsub.azure.com";
+
 const setIoSpare = (server) => {
   _ioSpareParty = new Server(server, {
-    path: "/api/v1/games/spareparty",
+    path: "/clients/socketio/hubs/spare_hub",
     cors: {
-      origin: "http://localhost:5173", // Update this to match your client's URL
+      origin: origin, // Update this to match your client's URL
       methods: ["GET", "POST"],
       allowedHeaders: [
         "Origin",
@@ -27,9 +29,9 @@ const setIoSpare = (server) => {
 
 const setIoFast = (server) => {
   _ioFastParty = new Server(server, {
-    path: "/api/v1/games/fastparty",
+    path: "/clients/socketio/hubs/fast_hub",
     cors: {
-      origin: "http://localhost:5173", // Update this to match your client's URL
+      origin: origin, // Update this to match your client's URL
       methods: ["GET", "POST"],
       allowedHeaders: [
         "Origin",
@@ -48,9 +50,9 @@ const setIoFast = (server) => {
 
 const setIoEasy = (server) => {
   _ioEasyParty = new Server(server, {
-    path: "/api/v1/games/easyparty",
+    path: "/clients/socketio/hubs/easy_hub",
     cors: {
-      origin: "http://localhost:5173", // Update this to match your client's URL
+      origin: origin, // Update this to match your client's URL
       methods: ["GET", "POST"],
       allowedHeaders: [
         "Origin",

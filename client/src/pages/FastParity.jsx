@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios";
+import process from "process";
 
 import Header from "../components/Header";
 import useLimitedCapacityArray from "../custom-hooks/useLimitedCapacityArray";
@@ -10,14 +11,12 @@ import generateRandomUserDataArray from "../modules/generateRandomDataArray";
 import RulePage from "../components/RulePage";
 import baseURL from "../baseURL";
 
-const SERVER_URL =
-  "http://localhost:8000" ||
-  process.argv[2] ||
-  "moneyballstore.webpubsub.azure.com";
-const SOCKET_PATH =
-  "/api/v1/games/fastparty" || "/clients/socketio/hubs/fast_hub";
+const SERVER_URL = process.argv[2] || "moneyballstore.webpubsub.azure.com";
+const SOCKET_PATH = "/clients/socketio/hubs/fast_hub";
 const TIMER_INTERVAL = 1000;
 const INITIAL_COUNTDOWN = 30;
+
+//   "/api/v1/games/fastparty"
 
 function FastParity() {
   const navigate = useNavigate();

@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import io from "socket.io-client";
 import axios from "axios";
+import process from "process";
 
 import Header from "../components/Header";
 import useLimitedCapacityArray from "../custom-hooks/useLimitedCapacityArray";
@@ -10,15 +11,14 @@ import generateRandomUserDataArray from "../modules/generateRandomDataArray";
 import { replaceDigitsWithY } from "../modules/replaceDigitsWithY";
 import RulePage from "../components/RulePage";
 import baseURL from "../baseURL";
+import useCounterWithReset from "../custom-hooks/useCounterWithReset";
 
-const SERVER_URL =
-  "http://localhost:8000" ||
-  process.argv[2] ||
-  "moneyballstore.webpubsub.azure.com";
-const SOCKET_PATH =
-  "/api/v1/games/easyparty" || "/clients/socketio/hubs/easy_hub";
+const SERVER_URL = process.argv[2] || "moneyballstore.webpubsub.azure.com";
+const SOCKET_PATH = "/clients/socketio/hubs/easy_hub";
 const TIMER_INTERVAL = 1000;
 const INITIAL_COUNTDOWN = 30;
+
+// socket url for development   "/api/v1/games/easyparty"
 
 export default function EasyParity() {
   const navigate = useNavigate();
@@ -83,6 +83,7 @@ export default function EasyParity() {
   });
   const [betAmount, setBetAmount] = useState(0);
   const [numberOfBet, setNumberOfBet] = useState(0);
+  const [count, increment] = useCounterWithReset();
 
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
@@ -457,6 +458,7 @@ export default function EasyParity() {
       });
       setBetAmount(0);
       setNumberOfBet(0);
+      increment();
 
       timer = setInterval(() => {
         setTimeLeft((prevTime) => {
@@ -620,14 +622,15 @@ export default function EasyParity() {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap items-center text-[#333] min-h-[100px] w-full mt-4 mb-1 border border-solid border-[#d0ebff] rounded bg-[#f9fcff]">
+      <div className="flex flex-wrap items-center text-[#333] min-h-[120px] w-full mt-4 mb-1 border border-solid border-[#d0ebff] rounded bg-[#f9fcff]">
         <div className="white-space-nowrap basis-1/8 text-lg text-gray-800 font-bold w-full max-w-[100%] h-full leading-10 bg-white cursor-pointer overflow-hidden">
           <div className="flex flex-col">
-            <span className="h-6">ex : 1 + 2 * 3 - 4</span>
-            <span className="h-6 border-solid border-yellow-300">
-              {firstBet ? expression : rExpression}
-            </span>
-            <span className="h-8">1, 2, 3, 4, 5, 6, 7, 8, 9</span>
+            <div className="pt-5">ex : 1 + 2 * 3 - 4</div>
+            <div className="border-solid border-yellow-300 bg-yellow-300">
+              <span className="px-1 pt-2">{count}.</span>
+              <span>{firstBet ? expression : rExpression}</span>
+            </div>
+            <div className="pb-5">1, 2, 3, 4, 5, 6, 7, 8, 9</div>
           </div>
         </div>
       </div>
