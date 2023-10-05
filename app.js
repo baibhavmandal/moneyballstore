@@ -7,7 +7,6 @@ import { createServer } from "http";
 import cron from "node-cron";
 import { useAzureSocketIO } from "@azure/web-pubsub-socket.io";
 import process from "process";
-import path from "path";
 
 // Import middleware
 import jwtSocketMiddleware from "./middlewares/jwtSocketMiddleware.js";
