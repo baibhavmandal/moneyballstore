@@ -7,6 +7,7 @@ import { createServer } from "http";
 import cron from "node-cron";
 import { useAzureSocketIO } from "@azure/web-pubsub-socket.io";
 import process from "process";
+import path from "path";
 
 // Import middleware
 import jwtSocketMiddleware from "./middlewares/jwtSocketMiddleware.js";
@@ -35,6 +36,7 @@ const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 8000;
 const databaseUrl = process.env.DATABASE_URL;
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 app.use(
   cors({
