@@ -4,7 +4,7 @@ let _ioSpareParty;
 let _ioFastParty;
 let _ioEasyParty;
 
-const origin = "moneyballstore.webpubsub.azure.com";
+const origin = "https://moneyballstore.webpubsub.azure.com";
 
 const setIoSpare = (server) => {
   _ioSpareParty = new Server(server, {

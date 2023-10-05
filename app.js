@@ -66,20 +66,42 @@ let ioSpareParty = gameRoutes.setIoSpare(server);
 let ioFastParty = gameRoutes.setIoFast(server);
 let ioEasyParty = gameRoutes.setIoEasy(server);
 
-useAzureSocketIO(ioSpareParty, {
-  hub: "spare_hub",
-  connectionString: process.argv[2] || process.env.WebPubSubConnectionString,
-});
+// Create an async function to perform the initialization
+const initializeSocketIO = async () => {
+  try {
+    // Initialize ioSpareParty
+    await useAzureSocketIO(ioSpareParty, {
+      hub: "spare_hub",
+      connectionString:
+        process.argv[2] || process.env.WebPubSubConnectionString,
+    });
 
-useAzureSocketIO(ioFastParty, {
-  hub: "fast_hub",
-  connectionString: process.argv[2] || process.env.WebPubSubConnectionString,
-});
+    console.log("ioSpareParty initialized successfully.");
 
-useAzureSocketIO(ioEasyParty, {
-  hub: "easy_hub",
-  connectionString: process.argv[2] || process.env.WebPubSubConnectionString,
-});
+    // Initialize ioFastParty
+    await useAzureSocketIO(ioFastParty, {
+      hub: "fast_hub",
+      connectionString:
+        process.argv[2] || process.env.WebPubSubConnectionString,
+    });
+
+    console.log("ioFastParty initialized successfully.");
+
+    // Initialize ioEasyParty
+    await useAzureSocketIO(ioEasyParty, {
+      hub: "easy_hub",
+      connectionString:
+        process.argv[2] || process.env.WebPubSubConnectionString,
+    });
+
+    console.log("ioEasyParty initialized successfully.");
+  } catch (error) {
+    console.error("Initialization error:", error);
+  }
+};
+
+// Call the initialization function
+initializeSocketIO();
 
 ioSpareParty.use(jwtSocketMiddleware);
 ioFastParty.use(jwtSocketMiddleware);
