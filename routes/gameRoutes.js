@@ -9,19 +9,6 @@ const origin = "https://moneyballstore.azurewebsites.net/";
 const setIoSpare = (server) => {
   _ioSpareParty = new Server(server, {
     path: "/clients/socketio/hubs/spare_hub",
-    cors: {
-      origin: origin, // Update this to match your client's URL
-      methods: ["GET", "POST"],
-      allowedHeaders: [
-        "Origin",
-        "X-Requested-With",
-        "Content-Type",
-        "Accept",
-        "Authorization",
-      ],
-      credentials: true,
-      optionSuccessStatus: 200,
-    },
   });
 
   return _ioSpareParty;
@@ -30,19 +17,6 @@ const setIoSpare = (server) => {
 const setIoFast = (server) => {
   _ioFastParty = new Server(server, {
     path: "/clients/socketio/hubs/fast_hub",
-    cors: {
-      origin: origin, // Update this to match your client's URL
-      methods: ["GET", "POST"],
-      allowedHeaders: [
-        "Origin",
-        "X-Requested-With",
-        "Content-Type",
-        "Accept",
-        "Authorization",
-      ],
-      credentials: true,
-      optionSuccessStatus: 200,
-    },
   });
 
   return _ioFastParty;
@@ -51,19 +25,6 @@ const setIoFast = (server) => {
 const setIoEasy = (server) => {
   _ioEasyParty = new Server(server, {
     path: "/clients/socketio/hubs/easy_hub",
-    cors: {
-      origin: origin, // Update this to match your client's URL
-      methods: ["GET", "POST"],
-      allowedHeaders: [
-        "Origin",
-        "X-Requested-With",
-        "Content-Type",
-        "Accept",
-        "Authorization",
-      ],
-      credentials: true,
-      optionSuccessStatus: 200,
-    },
   });
 
   return _ioEasyParty;
