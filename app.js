@@ -63,9 +63,9 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
-let ioSpareParty = gameRoutes.setIoSpare(server);
-let ioFastParty = gameRoutes.setIoFast(server);
-let ioEasyParty = gameRoutes.setIoEasy(server);
+let ioSpareParty = gameRoutes.setIoSpare();
+let ioFastParty = gameRoutes.setIoFast();
+let ioEasyParty = gameRoutes.setIoEasy();
 
 // Create an async function to perform the initialization
 const initializeSocketIO = async () => {
@@ -73,8 +73,7 @@ const initializeSocketIO = async () => {
     // Initialize ioSpareParty
     await useAzureSocketIO(ioSpareParty, {
       hub: "spare_hub",
-      connectionString:
-        process.argv[2] || process.env.WebPubSubConnectionString,
+      connectionString: process.env.WebPubSubConnectionString,
     });
 
     console.log("ioSpareParty initialized successfully.");
@@ -82,8 +81,7 @@ const initializeSocketIO = async () => {
     // Initialize ioFastParty
     await useAzureSocketIO(ioFastParty, {
       hub: "fast_hub",
-      connectionString:
-        process.argv[2] || process.env.WebPubSubConnectionString,
+      connectionString: process.env.WebPubSubConnectionString,
     });
 
     console.log("ioFastParty initialized successfully.");
@@ -91,8 +89,7 @@ const initializeSocketIO = async () => {
     // Initialize ioEasyParty
     await useAzureSocketIO(ioEasyParty, {
       hub: "easy_hub",
-      connectionString:
-        process.argv[2] || process.env.WebPubSubConnectionString,
+      connectionString: process.env.WebPubSubConnectionString,
     });
 
     console.log("ioEasyParty initialized successfully.");
