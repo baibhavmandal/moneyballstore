@@ -5,19 +5,19 @@ let _ioFastParty;
 let _ioEasyParty;
 
 const setIoSpare = () => {
-  _ioSpareParty = new Server();
+  _ioSpareParty = new Server(3000);
 
   return _ioSpareParty;
 };
 
 const setIoFast = () => {
-  _ioFastParty = new Server();
+  _ioFastParty = new Server(3000);
 
   return _ioFastParty;
 };
 
 const setIoEasy = () => {
-  _ioEasyParty = new Server();
+  _ioEasyParty = new Server(3000);
 
   return _ioEasyParty;
 };
