@@ -34,6 +34,7 @@ import { incrementCountById } from "./modules/dbModule.js";
 
 const app = express();
 const server = createServer(app);
+const ioserver = createServer();
 const PORT = process.env.PORT || 8000;
 const databaseUrl = process.env.DATABASE_URL;
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
@@ -63,9 +64,9 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
-let ioSpareParty = gameRoutes.setIoSpare();
-let ioFastParty = gameRoutes.setIoFast();
-let ioEasyParty = gameRoutes.setIoEasy();
+let ioSpareParty = gameRoutes.setIoSpare(ioserver);
+let ioFastParty = gameRoutes.setIoFast(ioserver);
+let ioEasyParty = gameRoutes.setIoEasy(ioserver);
 
 // Create an async function to perform the initialization
 const initializeSocketIO = async () => {
@@ -160,6 +161,7 @@ app.get("*", (req, res) => {
 const start = async () => {
   try {
     await connectDB(databaseUrl);
+    ioserver.listen(3000);
     server.listen(PORT, console.log("Server running at " + PORT));
   } catch (error) {
     console.log(error);
