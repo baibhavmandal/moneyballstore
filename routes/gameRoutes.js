@@ -4,28 +4,20 @@ let _ioSpareParty;
 let _ioFastParty;
 let _ioEasyParty;
 
-const origin = "https://moneyballstore.azurewebsites.net/";
-
-const setIoSpare = (server) => {
-  _ioSpareParty = new Server(server, {
-    path: "/clients/socketio/hubs/spare_hub",
-  });
+const setIoSpare = () => {
+  _ioSpareParty = new Server();
 
   return _ioSpareParty;
 };
 
-const setIoFast = (server) => {
-  _ioFastParty = new Server(server, {
-    path: "/clients/socketio/hubs/fast_hub",
-  });
+const setIoFast = () => {
+  _ioFastParty = new Server();
 
   return _ioFastParty;
 };
 
-const setIoEasy = (server) => {
-  _ioEasyParty = new Server(server, {
-    path: "/clients/socketio/hubs/easy_hub",
-  });
+const setIoEasy = () => {
+  _ioEasyParty = new Server();
 
   return _ioEasyParty;
 };
