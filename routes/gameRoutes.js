@@ -4,20 +4,20 @@ let _ioSpareParty;
 let _ioFastParty;
 let _ioEasyParty;
 
-const setIoSpare = () => {
-  _ioSpareParty = new Server(3000);
+const setIoSpare = (server) => {
+  _ioSpareParty = new Server(server);
 
   return _ioSpareParty;
 };
 
-const setIoFast = () => {
-  _ioFastParty = new Server(3000);
+const setIoFast = (server) => {
+  _ioFastParty = new Server(server);
 
   return _ioFastParty;
 };
 
-const setIoEasy = () => {
-  _ioEasyParty = new Server(3000);
+const setIoEasy = (server) => {
+  _ioEasyParty = new Server(server);
 
   return _ioEasyParty;
 };
