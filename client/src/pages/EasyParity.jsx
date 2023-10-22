@@ -15,7 +15,7 @@ import useCounterWithReset from "../custom-hooks/useCounterWithReset";
 
 const SERVER_URL =
   process.argv[2] || "https://moneyballstore.webpubsub.azure.com";
-const SOCKET_PATH = "/clients/socketio/hubs/easy_hub";
+const SOCKET_PATH = "/clients/socketio/hubs/game_hub";
 const TIMER_INTERVAL = 1000;
 const INITIAL_COUNTDOWN = 30;
 
