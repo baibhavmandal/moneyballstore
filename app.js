@@ -26,6 +26,7 @@ import {
 
 // Import game controllers
 import {
+  gameParity,
   spareParity,
   fastParity,
   easyParity,
