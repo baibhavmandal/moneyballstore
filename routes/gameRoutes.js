@@ -6,9 +6,7 @@ const origin = "https://moneyballstore.webpubsub.azure.com";
 
 const setIoGame = (server) => {
   _ioGameParty = new Server(server, {
-    path: "/clients/socketio/hubs/game_hub",
     cors: {
-      origin: origin, // Update this to match your client's URL
       methods: ["GET", "POST"],
       allowedHeaders: [
         "Origin",
