@@ -70,7 +70,12 @@ function handleEventBeforeInitialize(gameName) {
 }
 
 // Function to handle the event after initializeArraysToZero
-async function handleEventAfterInitialize(gameName, gameResult, periodId) {
+async function handleEventAfterInitialize(
+  gameName,
+  namespace,
+  gameResult,
+  periodId
+) {
   try {
     console.log("Event after initializeArraysToZero executed at:", new Date());
 
@@ -78,16 +83,16 @@ async function handleEventAfterInitialize(gameName, gameResult, periodId) {
     initializeArraysToZero(gameName);
     if (gameName == "spareParity") {
       const count = await getPeriodById(periodId);
-      gameRoutes.getIOSpare().emit("reset", gameResult, count);
+      namespace.emit("reset", gameResult, count);
       initializeSpareParityUserDetails();
     } else if (gameName == "fastParity") {
       const count = await getPeriodById(periodId);
-      gameRoutes.getIOFast().emit("reset", gameResult, count);
+      namespace.emit("reset", gameResult, count);
       initializeFastParityUserDetails();
     } else {
       const expression = easyParityGame.generateRandomExpression();
       const count = await getPeriodById(periodId);
-      gameRoutes.getIOEasy().emit("reset", expression, gameResult, count);
+      namespace.emit("reset", expression, gameResult, count);
       updateExpression(expression);
       initializeEasyParityUserDetails();
     }

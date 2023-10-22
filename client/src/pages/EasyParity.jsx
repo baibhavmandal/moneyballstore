@@ -348,11 +348,10 @@ export default function EasyParity() {
   }, [userId, token]);
 
   useEffect(() => {
-    const socket = io(SERVER_URL, {
+    const socket = io(`${SERVER_URL}easy`, {
       path: SOCKET_PATH,
-      auth: {
-        crazygames_auth: token,
-      },
+      transports: ["websocket"],
+      auth: { crazygames_auth: token },
     });
 
     // Timer logic

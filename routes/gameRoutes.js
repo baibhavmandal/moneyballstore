@@ -1,48 +1,35 @@
 import { Server } from "socket.io";
 
-let _ioSpareParty;
-let _ioFastParty;
-let _ioEasyParty;
+let _ioGameParty;
 
-const setIoSpare = (server) => {
-  _ioSpareParty = new Server(server);
+const origin = "https://moneyballstore.webpubsub.azure.com";
 
-  return _ioSpareParty;
+const setIoGame = (server) => {
+  _ioGameParty = new Server(server, {
+    path: "/clients/socketio/hubs/game_hub",
+    cors: {
+      origin: origin, // Update this to match your client's URL
+      methods: ["GET", "POST"],
+      allowedHeaders: [
+        "Origin",
+        "X-Requested-With",
+        "Content-Type",
+        "Accept",
+        "Authorization",
+      ],
+      credentials: true,
+      optionSuccessStatus: 200,
+    },
+  });
+
+  return _ioGameParty;
 };
 
-const setIoFast = (server) => {
-  _ioFastParty = new Server(server);
-
-  return _ioFastParty;
-};
-
-const setIoEasy = (server) => {
-  _ioEasyParty = new Server(server);
-
-  return _ioEasyParty;
-};
-
-const getIOSpare = () => {
-  return _ioSpareParty;
-};
-
-const getIOFast = () => {
-  return _ioFastParty;
-};
-
-const getIOEasy = () => {
-  try {
-    return _ioEasyParty;
-  } catch (error) {
-    console.log(error);
-  }
+const getIOGame = () => {
+  return _ioGameParty;
 };
 
 export default {
-  setIoSpare,
-  setIoFast,
-  setIoEasy,
-  getIOSpare,
-  getIOFast,
-  getIOEasy,
+  setIoGame,
+  getIOGame,
 };

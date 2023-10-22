@@ -343,13 +343,11 @@ function SpareParity() {
       return;
     }
 
-    const socket = io(SERVER_URL, {
+    const socket = io(`${SERVER_URL}spare`, {
       path: SOCKET_PATH,
-      auth: {
-        crazygames_auth: token,
-      },
+      transports: ["websocket"],
+      auth: { crazygames_auth: token },
     });
-
     // Timer logic
     let timer = setInterval(() => {
       setTimeLeft((prevTime) => {

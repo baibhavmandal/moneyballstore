@@ -343,11 +343,10 @@ function FastParity() {
       return;
     }
 
-    const socket = io(SERVER_URL, {
+    const socket = io(`${SERVER_URL}fast`, {
       path: SOCKET_PATH,
-      auth: {
-        crazygames_auth: token,
-      },
+      transports: ["websocket"],
+      auth: { crazygames_auth: token },
     });
 
     // Timer logic
