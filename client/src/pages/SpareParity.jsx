@@ -343,7 +343,7 @@ function SpareParity() {
       return;
     }
 
-    const socket = io(`${SERVER_URL}spare`, {
+    const socket = io(`${SERVER_URL}/spare`, {
       path: SOCKET_PATH,
       transports: ["websocket"],
       auth: { crazygames_auth: token },

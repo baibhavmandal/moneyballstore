@@ -343,7 +343,7 @@ function FastParity() {
       return;
     }
 
-    const socket = io(`${SERVER_URL}fast`, {
+    const socket = io(`${SERVER_URL}/fast`, {
       path: SOCKET_PATH,
       transports: ["websocket"],
       auth: { crazygames_auth: token },

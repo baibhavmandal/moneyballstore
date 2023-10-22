@@ -348,7 +348,7 @@ export default function EasyParity() {
   }, [userId, token]);
 
   useEffect(() => {
-    const socket = io(`${SERVER_URL}easy`, {
+    const socket = io(`${SERVER_URL}/easy`, {
       path: SOCKET_PATH,
       transports: ["websocket"],
       auth: { crazygames_auth: token },
