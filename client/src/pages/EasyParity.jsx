@@ -14,8 +14,10 @@ import baseURL from "../baseURL";
 import useCounterWithReset from "../custom-hooks/useCounterWithReset";
 
 const SERVER_URL =
-  process.argv[2] || "https://moneyballstore.webpubsub.azure.com";
-const SOCKET_PATH = "/clients/socketio/hubs/easy_hub";
+  "http://localhost:8000/" ||
+  process.argv[2] ||
+  "https://moneyballstore.webpubsub.azure.com";
+const SOCKET_PATH = "/clients/socketio/hubs/game_hub";
 const TIMER_INTERVAL = 1000;
 const INITIAL_COUNTDOWN = 30;
 
@@ -348,11 +350,10 @@ export default function EasyParity() {
   }, [userId, token]);
 
   useEffect(() => {
-    const socket = io(SERVER_URL, {
+    const socket = io(`${SERVER_URL}easy`, {
       path: SOCKET_PATH,
-      auth: {
-        crazygames_auth: token,
-      },
+      transports: ["websocket"],
+      auth: { crazygames_auth: token },
     });
 
     // Timer logic

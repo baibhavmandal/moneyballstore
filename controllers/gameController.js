@@ -32,6 +32,10 @@ function timeUntilNext3MinuteInterval() {
   return intervalMod;
 }
 
+const gameParity = async (socket) => {
+  console.log("A user connected to the game");
+};
+
 const spareParity = async (socket) => {
   console.log("SpareParty: A user connected");
 
@@ -112,4 +116,4 @@ const easyParity = async (socket) => {
   });
 };
 
-export { spareParity, fastParity, easyParity };
+export { gameParity, spareParity, fastParity, easyParity };

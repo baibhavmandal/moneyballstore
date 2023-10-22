@@ -26,6 +26,7 @@ import {
 
 // Import game controllers
 import {
+  gameParity,
   spareParity,
   fastParity,
   easyParity,
@@ -63,54 +64,39 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/admin", adminRoutes);
 
-let ioSpareParty = gameRoutes.setIoSpare(server);
-let ioFastParty = gameRoutes.setIoFast(server);
-let ioEasyParty = gameRoutes.setIoEasy(server);
+let ioGameParty = gameRoutes.setIoGame(server);
 
 // Create an async function to perform the initialization
 const initializeSocketIO = async () => {
   try {
     // Initialize ioSpareParty
-    await useAzureSocketIO(ioSpareParty, {
-      hub: "spare_hub",
+    await useAzureSocketIO(ioGameParty, {
+      hub: "game_hub",
       connectionString:
         process.argv[2] || process.env.WebPubSubConnectionString,
     });
 
-    console.log("ioSpareParty initialized successfully.");
-
-    // Initialize ioFastParty
-    await useAzureSocketIO(ioFastParty, {
-      hub: "fast_hub",
-      connectionString:
-        process.argv[2] || process.env.WebPubSubConnectionString,
-    });
-
-    console.log("ioFastParty initialized successfully.");
-
-    // Initialize ioEasyParty
-    await useAzureSocketIO(ioEasyParty, {
-      hub: "easy_hub",
-      connectionString:
-        process.argv[2] || process.env.WebPubSubConnectionString,
-    });
-
-    console.log("ioEasyParty initialized successfully.");
+    console.log("ioGameParty initialized successfully.");
   } catch (error) {
     console.error("Initialization error:", error);
   }
 };
 
 // Call the initialization function
-initializeSocketIO();
+// initializeSocketIO();
 
-ioSpareParty.use(jwtSocketMiddleware);
-ioFastParty.use(jwtSocketMiddleware);
-ioEasyParty.use(jwtSocketMiddleware);
+ioGameParty.use(jwtSocketMiddleware);
 
-ioSpareParty.on("connection", spareParity);
-ioFastParty.on("connection", fastParity);
-ioEasyParty.on("connection", easyParity);
+ioGameParty.on("connection", gameParity);
+
+// Define namespaces for parties
+const spareNamespace = ioGameParty.of("/spare");
+const fastNamespace = ioGameParty.of("/fast");
+const easyNamespace = ioGameParty.of("/easy");
+
+spareNamespace.on("connection", spareParity);
+fastNamespace.on("connection", fastParity);
+easyNamespace.on("connection", easyParity);
 
 // cron schedule events
 // Handle Spare Parity schedule
@@ -121,7 +107,12 @@ cron.schedule("*/3 * * * *", async () => {
     const gameResult = await handleEventBeforeInitialize("spareParity");
 
     // After the promise is resolved
-    handleEventAfterInitialize("spareParity", gameResult, periodId);
+    handleEventAfterInitialize(
+      "spareParity",
+      spareNamespace,
+      gameResult,
+      periodId
+    );
     incrementCountById(periodId);
   } catch (error) {
     console.error("Error in cron job:", error);
@@ -136,7 +127,12 @@ cron.schedule("*/30 * * * * *", async () => {
     const gameResult = await handleEventBeforeInitialize("fastParity");
 
     // After the promise is resolved
-    handleEventAfterInitialize("fastParity", gameResult, periodId);
+    handleEventAfterInitialize(
+      "fastParity",
+      fastNamespace,
+      gameResult,
+      periodId
+    );
     incrementCountById(periodId);
   } catch (error) {
     console.error("Error:", error);
@@ -150,15 +146,20 @@ cron.schedule("*/30 * * * * *", async () => {
     // Execute the event before initializeArraysToZero
     const gameResult = await handleEventBeforeInitialize("easyParity");
     // After the promise is resolved
-    handleEventAfterInitialize("easyParity", gameResult, periodId);
+    handleEventAfterInitialize(
+      "easyParity",
+      easyNamespace,
+      gameResult,
+      periodId
+    );
     incrementCountById(periodId);
   } catch (error) {}
 });
 
-app.use(express.static("./client/dist"));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
-});
+// app.use(express.static("./client/dist"));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "client", "dist", "index.html"));
+// });
 
 const start = async () => {
   try {

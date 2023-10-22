@@ -6,6 +6,9 @@ import Footer from "../components/Footer";
 import imgUrlFastParity from "../assets/FAST-PARITY.png";
 import imgUrlEasyParity from "../assets/EASY-PARITY.png";
 import imgUrlSpareParity from "../assets/SPARE-PARITY.png";
+import imgUrlAndarBahar from "../assets/ANDAR-BAHAR.png";
+import imgUrlInstant from "../assets/INSTANT.png";
+import imgUrlJetX from "../assets/JET-X.png";
 import imgUrlReferral from "../assets/Referral.png";
 import imgUrlReload from "../assets/reload.svg";
 import { fetchUserBalance } from "../utils/fetchUserData";
@@ -63,7 +66,7 @@ const User = () => {
   }, [userId]);
 
   return (
-    <div className="col-lg-4 col-md-6 w-full h-full px-4 bg-white fixed overflow-scroll">
+    <div className="col-lg-4 col-md-6 w-full h-full px-2 md:px-4 bg-white fixed overflow-scroll">
       <div className="flex flex-wrap mt-4">
         <div className="flex-[0_0_100%] w-full px-4 max-w-[100%] relative">
           <div className="items-center flex flex-wrap h-32 m-0 mt-4">
@@ -132,6 +135,39 @@ const User = () => {
                   <img
                     className="w-full rounded-lg bg-contain"
                     src={imgUrlSpareParity}
+                    alt="Can't load image"
+                  />
+                </Link>
+              </div>
+            </div>
+            <div className="flex-[0_0_50%] w-full max-w-[50%] mt-2 px-2 relative">
+              <div className="whiteapce-nowrap text-sm text-left w-fit rounded-lg cursor-pointer">
+                <Link to="">
+                  <img
+                    className="w-full rounded-lg bg-contain"
+                    src={imgUrlAndarBahar}
+                    alt="Can't load image"
+                  />
+                </Link>
+              </div>
+            </div>
+            <div className="flex-[0_0_50%] w-full max-w-[50%] mt-2 px-2 relative">
+              <div className="whiteapce-nowrap text-sm text-left w-fit rounded-lg cursor-pointer">
+                <Link to="">
+                  <img
+                    className="w-full rounded-lg bg-contain"
+                    src={imgUrlInstant}
+                    alt="Can't load image"
+                  />
+                </Link>
+              </div>
+            </div>
+            <div className="flex-[0_0_50%] w-full max-w-[50%] mt-2 px-2 relative">
+              <div className="whiteapce-nowrap text-sm text-left w-fit rounded-lg cursor-pointer">
+                <Link to="">
+                  <img
+                    className="w-full rounded-lg bg-contain"
+                    src={imgUrlJetX}
                     alt="Can't load image"
                   />
                 </Link>
